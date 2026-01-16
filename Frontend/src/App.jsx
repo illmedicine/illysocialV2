@@ -14,20 +14,29 @@ function App() {
         style={{
           position: 'fixed',
           bottom: '20px',
-          right: '20px',
-          padding: '12px 24px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          left: '20px',
+          padding: '10px 16px',
+          background: 'rgba(0, 0, 0, 0.7)',
           color: 'white',
-          border: 'none',
-          borderRadius: '25px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '8px',
           cursor: 'pointer',
-          fontWeight: '600',
-          fontSize: '14px',
-          boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
-          zIndex: 1000
+          fontWeight: '500',
+          fontSize: '12px',
+          backdropFilter: 'blur(10px)',
+          zIndex: 999,
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = 'rgba(0, 0, 0, 0.9)';
+          e.target.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = 'rgba(0, 0, 0, 0.7)';
+          e.target.style.transform = 'translateY(0)';
         }}
       >
-        {currentPage === 'home' ? '📊 Admin Panel' : '🏠 Home'}
+        {currentPage === 'home' ? '⚙️ Admin' : '🏠 Home'}
       </button>
     </div>
   );
