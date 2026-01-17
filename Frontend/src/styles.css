@@ -61,7 +61,6 @@ html, body {
   align-items: center;
   padding: 20px 40px;
   background: var(--card-bg);
-  backdrop-filter: blur(10px);
   box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
@@ -79,6 +78,10 @@ html, body {
 
 .logo-text-accent {
   color: var(--secondary-color);
+}
+
+.nav-buttons button {
+  margin-left: 10px;
 }
 
 .nav-buttons {
@@ -111,6 +114,53 @@ html, body {
 
 .contact-btn:hover {
   box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger {
+  width: 30px;
+  height: 3px;
+  background: var(--text-primary);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
+
+.menu-toggle.active .hamburger {
+  background: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.active .hamburger::after {
+  bottom: 0;
+  transform: rotate(-45deg);
 }
 
 /* Home Section */
@@ -602,17 +652,44 @@ html, body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Navbar responsive styles */
   .nav-tab {
-    flex-direction: column;
-    gap: 20px;
     padding: 20px;
   }
 
-  .nav-buttons {
-    flex-wrap: wrap;
-    justify-content: center;
+  .menu-toggle {
+    display: block;
   }
 
+    .nav-buttons {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Start off-screen */
+    width: 300px; /* Set a fixed width for the sidebar */
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    gap: 25px;
+    padding-top: 100px; /* Add padding to push items down */
+    transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother transition */
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-buttons.active {
+    right: 0;
+  }
+
+  .nav-buttons .nav-btn {
+    width: 80%;
+    padding: 18px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Other existing responsive styles */
   .illysocial {
     font-size: 48px;
   }
@@ -1475,6 +1552,392 @@ html, body {
   margin: 5px 0 0 0;
 }
 
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 20px;
+}
+
+.auth-card {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to single column for mobile */
+  width: 100%;
+  max-width: 900px; /* Max width for the card */
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden; /* Ensures child elements conform to border-radius */
+}
+
+.auth-info {
+  display: none; /* Hide on mobile by default */
+  background: var(--primary-gradient);
+  padding: 60px;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-info .nav-logo {
+  margin-bottom: 40px;
+  justify-content: flex-start;
+}
+
+.info-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.info-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.auth-form-container {
+  padding: 60px;
+}
+
+/* Desktop layout (landscape) */
+@media (min-width: 768px) {
+  .auth-card {
+    grid-template-columns: 1fr 1fr; /* Two equal columns on desktop */
+  }
+
+  .auth-info {
+    display: flex; /* Show the info panel on desktop */
+  }
+}
+
+.auth-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.auth-error {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 25px 0;
+  color: var(--text-muted);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider span {
+  padding: 0 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.google-btn:hover {
+  background: var(--light-bg);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.auth-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-link {
+  color: #764ba2;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+  color: #667eea;
+}
+
+.user-email {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 12px 20px;
+  background: var(--light-bg);
+  border-radius: 25px;
+  white-space: nowrap;
+}
+
+/* Profile Menu Styles */
+.profile-menu-container {
+  position: relative;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.profile-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 15px;
+  width: 220px;
+  z-index: 1001;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.dropdown-email {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-signout {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.3s ease;
+}
+
+.dropdown-signout:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Membership Section */
+.membership-section {
+  background: var(--light-bg-secondary);
+}
+
+.membership-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.membership-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.membership-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.membership-card.premium-card {
+  border: 2px solid var(--primary-color);
+  background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-bg-secondary) 100%);
+}
+
+.membership-card .card-header {
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.membership-card h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.membership-card .price {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.membership-card .price span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 5px;
+}
+
+.features-list {
+  list-style: none;
+  margin-bottom: 40px;
+  flex-grow: 1;
+}
+
+.features-list li {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.select-plan-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  background: var(--primary-gradient);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-plan-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.select-plan-btn.disabled-btn {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.select-plan-btn.disabled-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .membership-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Responsive Design for Categories */
 @media (max-width: 768px) {
   .categories-grid {
@@ -1517,3 +1980,4 @@ html, body {
     font-size: 1.5rem;
   }
 }
+
