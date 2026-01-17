@@ -1,16 +1,37 @@
-import { useState } from 'react';
-import Home from './pages/Home'
-import Admin from './pages/Admin'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const navigate = useNavigate();
+  const location = useLocation(); // to know current page
+
+  const isHome = location.pathname === '/';
+
+  const togglePage = () => {
+    if (isHome) {
+      navigate('/admin');
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <div>
-      {currentPage === 'home' && <Home />}
-      {currentPage === 'admin' && <Admin />}
+      {/* <Navbar /> */}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+      </Routes>
+
+      {/* Toggle Button */}
       <button 
-        onClick={() => setCurrentPage(currentPage === 'home' ? 'admin' : 'home')}
+        onClick={togglePage}
         style={{
           position: 'fixed',
           bottom: '20px',
@@ -36,10 +57,10 @@ function App() {
           e.target.style.transform = 'translateY(0)';
         }}
       >
-        {currentPage === 'home' ? '⚙️ Admin' : '🏠 Home'}
+        {isHome ? '⚙️ Admin' : '🏠 Home'}
       </button>
     </div>
   );
 }
 
-export default App
+export default App;

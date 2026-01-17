@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ServiceModal from '../components/ServiceModal';
 import { servicesData } from '../data/services.js';
 
 const Home = () => {
-  console.log('Home component rendering');
+  const location = useLocation();
   const [selectedService, setSelectedService] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+   useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   // Icon mapping for string icons
   const getIcon = (iconName) => {
@@ -209,6 +221,51 @@ const Home = () => {
               <p className="feature-description">
                 Round the clock support to help you with any questions or issues
               </p>
+            </div>
+          </div>
+        </section>
+
+                <section id="membership" className="section membership-section">
+          <h2 className="section-title">Choose Your Plan</h2>
+          <div className="membership-cards">
+            {/* Free Tier */}
+            <div className="membership-card">
+              <div className="card-header">
+                <h3>Free</h3>
+                <p className="price">
+                  $0<span>/month</span>
+                </p>
+              </div>
+              <ul className="features-list">
+                <li>✅ Basic access to services</li>
+                <li>✅ Standard support</li>
+                <li>❌ Real-time stats</li>
+                <li>❌ Self-advertisement</li>
+                <li>❌ 10% discount on boosts</li>
+              </ul>
+              <button className="select-plan-btn disabled-btn">
+                Your Current Plan
+              </button>
+            </div>
+
+            {/* Premium Tier */}
+            <div className="membership-card premium-card">
+              <div className="card-header">
+                <h3>Premium</h3>
+                <p className="price">
+                  $5<span>/month</span>
+                </p>
+              </div>
+              <ul className="features-list">
+                <li>✅ Full access to all services</li>
+                <li>✅ Priority support</li>
+                <li>✅ Real-time stats</li>
+                <li>✅ Self-advertisement feature</li>
+                <li>✅ 10% discount on all boosts</li>
+              </ul>
+              <button className="select-plan-btn">
+                Upgrade to Premium
+              </button>
             </div>
           </div>
         </section>
