@@ -70,14 +70,25 @@ html, body {
 .nav-logo {
   font-size: 28px;
   font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.4));
 }
 
 .logo-text {
-  color: var(--primary-color);
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .logo-text-accent {
-  color: var(--secondary-color);
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-buttons button {
@@ -171,30 +182,43 @@ html, body {
   justify-content: center;
   text-align: center;
   padding-top: 60px;
-  background: var(--hero-bg);
+  background: linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
 }
 
 .illysocial {
-  font-size: 72px;
+  font-size: 96px;
   font-weight: 800;
   margin-bottom: 30px;
   letter-spacing: -2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6)) drop-shadow(0 0 40px rgba(240, 147, 251, 0.4));
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6)) drop-shadow(0 0 40px rgba(240, 147, 251, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.8)) drop-shadow(0 0 60px rgba(240, 147, 251, 0.6));
+  }
 }
 
 .illy-text {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  background: inherit;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
 }
 
 .social-text {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  background: inherit;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 4px 30px rgba(255, 215, 0, 0.3);
 }
 
 .about-text {
@@ -246,6 +270,100 @@ html, body {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.6;
+}
+
+/* Best Offers Section */
+.best-offers-section {
+  background: #0f0f23;
+  padding: 80px 20px;
+}
+
+.best-offers-section .section-title {
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.offer-card {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.hot-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.offer-platform {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.offer-platform .platform-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--primary-color);
+}
+
+.offer-platform span {
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.offer-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 12px;
+}
+
+.offer-price {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.offer-quantity {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Shop Section */
@@ -1978,6 +2096,505 @@ html, body {
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
+  }
+}
+
+/* Discord Section Styles */
+.discord-section {
+  background: #0f0f23;
+  padding: 80px 20px;
+  min-height: auto;
+}
+
+.discord-header-logo {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.illy-logo-text-large {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+}
+
+.discord-page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.discord-partner-cta {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.partner-link {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.partner-link:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
+.discord-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.discord-card {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.discord-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.illysocial-logo {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.discord-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(88, 101, 242, 0.2);
+  color: #5865F2;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.discord-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: #5865F2;
+}
+
+.about-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.stats-badges {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-badge strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stat-badge.active {
+  background: rgba(35, 165, 90, 0.2);
+}
+
+.active-dot {
+  width: 8px;
+  height: 8px;
+  background: #23a55a;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.server-description,
+.server-mission {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.discord-join-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.discord-join-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.discord-join-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.discord-join-btn.secondary {
+  background: linear-gradient(135deg, #667eea 0%, #00d4ff 100%);
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.listing-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.view-link {
+  font-size: 12px;
+  color: #00d4ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.view-link:hover {
+  color: #f093fb;
+}
+
+.server-info {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.server-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(145deg, #1a1a2e 0%, #0f0f23 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.server-icon span {
+  font-size: 10px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.server-details h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.stats-badges.small .stat-badge {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+.listing-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* YouTube Creator Café Card Styles */
+.youtube-cafe-card {
+  grid-column: span 2;
+}
+
+.cafe-logo {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cafe-logo svg {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+/* Illy Social Logo */
+.illy-logo {
+  background: linear-gradient(145deg, #1a1a2e 0%, #0f0f23 100%);
+  border: 2px solid rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.illy-logo-text {
+  font-size: 11px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.illy-logo-img {
+  width: 100%;
+  height: auto;
+  max-width: 60px;
+  object-fit: contain;
+}
+
+/* Content Creators Cabin Logo */
+.cabin-logo {
+  background: linear-gradient(145deg, #2d1f3d 0%, #1a0a2e 100%);
+  border: 2px solid rgba(255, 100, 150, 0.5);
+  box-shadow: 0 0 20px rgba(255, 100, 150, 0.4), inset 0 0 20px rgba(255, 100, 150, 0.1);
+}
+
+.cabin-logo svg {
+  fill: #ff6496;
+  filter: drop-shadow(0 0 8px rgba(255, 100, 150, 0.8));
+}
+
+.cafe-info {
+  align-items: center;
+}
+
+.cafe-tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.cafe-badges {
+  margin-top: 16px;
+}
+
+.stat-badge.youtube-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.stat-badge svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.live-stats-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 16px;
+  background: rgba(35, 165, 90, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(35, 165, 90, 0.3);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #23a55a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #23a55a;
+  border-radius: 50%;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px #23a55a;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px #23a55a;
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #23a55a, 0 0 30px #23a55a;
+  }
+}
+
+.live-count {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.live-count strong {
+  color: #23a55a;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.cafe-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.discord-join-btn.cafe-join {
+  flex: 1;
+  background: linear-gradient(135deg, #5865F2 0%, #7289da 100%);
+}
+
+.bump-btn {
+  flex: 1;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bump-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
+}
+
+.share-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.share-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.share-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.share-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+.share-icon.facebook {
+  background: #1877F2;
+}
+
+.share-icon.twitter {
+  background: #1DA1F2;
+}
+
+.share-icon.reddit {
+  background: #FF4500;
+}
+
+.share-icon:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .discord-cards-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .discord-page-title {
+    font-size: 32px;
+  }
+
+  .youtube-cafe-card {
+    grid-column: span 1;
+  }
+
+  .cafe-actions {
+    flex-direction: column;
+  }
+
+  .cafe-info {
+    flex-direction: column;
+    text-align: center;
   }
 }
 

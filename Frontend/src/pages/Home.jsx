@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ServiceModal from '../components/ServiceModal';
+import DiscordStats from '../components/DiscordStats';
 import { servicesData } from '../data/services.js';
 
 const Home = () => {
@@ -269,6 +270,109 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        <section id="best-offers" className="section best-offers-section">
+          <h2 className="section-title">Best Offers</h2>
+          <div className="offers-grid">
+            {/* Instagram Offers */}
+            <div className="offer-card" onClick={() => { setSelectedCategory('instagram'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('instagram')}
+                <span>Instagram Likes</span>
+              </div>
+              <p className="offer-subtitle">Instagram</p>
+              <p className="offer-price">$100</p>
+              <p className="offer-quantity">100 likes</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('instagram'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('instagram')}
+                <span>Instagram Likes</span>
+              </div>
+              <p className="offer-subtitle">Instagram</p>
+              <p className="offer-price">$250</p>
+              <p className="offer-quantity">250 likes</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('instagram'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('instagram')}
+                <span>Instagram Followers</span>
+              </div>
+              <p className="offer-subtitle">Instagram</p>
+              <p className="offer-price">$500</p>
+              <p className="offer-quantity">500 followers</p>
+            </div>
+            
+            {/* YouTube Offers */}
+            <div className="offer-card" onClick={() => { setSelectedCategory('youtube'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('youtube')}
+                <span>YouTube Views</span>
+              </div>
+              <p className="offer-subtitle">YouTube</p>
+              <p className="offer-price">$100</p>
+              <p className="offer-quantity">100 views</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('youtube'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('youtube')}
+                <span>YouTube Subscribers</span>
+              </div>
+              <p className="offer-subtitle">YouTube</p>
+              <p className="offer-price">$250</p>
+              <p className="offer-quantity">250 subscribers</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('youtube'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('youtube')}
+                <span>YouTube Likes</span>
+              </div>
+              <p className="offer-subtitle">YouTube</p>
+              <p className="offer-price">$500</p>
+              <p className="offer-quantity">500 likes</p>
+            </div>
+            
+            {/* Spotify Offers */}
+            <div className="offer-card" onClick={() => { setSelectedCategory('spotify'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('spotify')}
+                <span>Spotify Plays</span>
+              </div>
+              <p className="offer-subtitle">Spotify</p>
+              <p className="offer-price">$100</p>
+              <p className="offer-quantity">100 plays</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('spotify'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('spotify')}
+                <span>Spotify Followers</span>
+              </div>
+              <p className="offer-subtitle">Spotify</p>
+              <p className="offer-price">$250</p>
+              <p className="offer-quantity">250 followers</p>
+            </div>
+            <div className="offer-card" onClick={() => { setSelectedCategory('spotify'); }}>
+              <span className="hot-badge">HOT</span>
+              <div className="offer-platform">
+                {getIcon('spotify')}
+                <span>Spotify Plays</span>
+              </div>
+              <p className="offer-subtitle">Spotify</p>
+              <p className="offer-price">$1,000</p>
+              <p className="offer-quantity">1k plays</p>
+            </div>
+          </div>
+        </section>
+
+        <DiscordStats />
 
         <section id="shop" className="section shop-section">
           <h2 className="store-title">Our Shop</h2>

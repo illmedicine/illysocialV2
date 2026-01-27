@@ -8,7 +8,7 @@ export const servicesData = {
       {
         id: 'insta-likes',
         name: 'Instagram Likes',
-        pricePer10k: 89.21,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -19,7 +19,7 @@ export const servicesData = {
       {
         id: 'insta-followers',
         name: 'Instagram Followers',
-        pricePer10k: 127.49,
+        pricePer10k: 10000,
         deliveryTime: '2-5 days',
         quality: 'Premium',
         unit: 'followers',
@@ -30,7 +30,7 @@ export const servicesData = {
       {
         id: 'insta-views',
         name: 'Instagram Views',
-        pricePer10k: 12.65,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -41,7 +41,7 @@ export const servicesData = {
       {
         id: 'insta-story-views',
         name: 'Instagram Story Views',
-        pricePer10k: 12.65,
+        pricePer10k: 10000,
         deliveryTime: 'Instant - 6 hours',
         quality: 'Premium',
         unit: 'views',
@@ -52,7 +52,7 @@ export const servicesData = {
       {
         id: 'insta-live-likes',
         name: 'Instagram Live Likes',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'likes',
@@ -63,7 +63,7 @@ export const servicesData = {
       {
         id: 'insta-live-views',
         name: 'Instagram Live Views',
-        pricePer10k: 279.29,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'views',
@@ -74,7 +74,7 @@ export const servicesData = {
       {
         id: 'insta-impression',
         name: 'Instagram Impressions',
-        pricePer10k: 4.95,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'impressions',
@@ -85,7 +85,7 @@ export const servicesData = {
       {
         id: 'insta-business',
         name: 'Instagram Business Package',
-        pricePer10k: 163.90,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'package',
@@ -96,7 +96,7 @@ export const servicesData = {
       {
         id: 'insta-power-likes',
         name: 'Instagram Power Likes',
-        pricePer10k: 89.21,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'Premium',
         unit: 'likes',
@@ -107,7 +107,7 @@ export const servicesData = {
       {
         id: 'insta-comments',
         name: 'Instagram Comments',
-        pricePer10k: 637.89,
+        pricePer10k: 11000,
         deliveryTime: '1-24 hours',
         quality: 'Premium',
         unit: 'comments',
@@ -125,7 +125,7 @@ export const servicesData = {
       {
         id: 'yt-views',
         name: 'YouTube Views',
-        pricePer10k: 48.40,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -136,7 +136,7 @@ export const servicesData = {
       {
         id: 'yt-subscribers',
         name: 'YouTube Subscribers',
-        pricePer10k: 293.37,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'subscribers',
@@ -147,7 +147,7 @@ export const servicesData = {
       {
         id: 'yt-shares',
         name: 'YouTube Shares',
-        pricePer10k: 50.93,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'shares',
@@ -158,7 +158,7 @@ export const servicesData = {
       {
         id: 'yt-live-views',
         name: 'YouTube Live Stream Views',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'views',
@@ -169,7 +169,7 @@ export const servicesData = {
       {
         id: 'yt-likes',
         name: 'YouTube Likes',
-        pricePer10k: 127.49,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -180,7 +180,7 @@ export const servicesData = {
       {
         id: 'yt-comment-likes',
         name: 'YouTube Comment Likes',
-        pricePer10k: 153.01,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -191,7 +191,7 @@ export const servicesData = {
       {
         id: 'yt-comment-dislikes',
         name: 'YouTube Comment Dislikes',
-        pricePer10k: 255.09,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'dislikes',
@@ -202,7 +202,7 @@ export const servicesData = {
       {
         id: 'yt-watch-time',
         name: 'YouTube Watch Time',
-        pricePer10k: 574.09,
+        pricePer10k: 283.33,
         deliveryTime: '1-3 days',
         quality: 'Premium',
         unit: 'minutes',
@@ -213,7 +213,7 @@ export const servicesData = {
       {
         id: 'yt-dislikes',
         name: 'YouTube Dislikes',
-        pricePer10k: 255.09,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'dislikes',
@@ -224,7 +224,7 @@ export const servicesData = {
       {
         id: 'yt-premium',
         name: 'YouTube Premium Waiting List',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '7-14 days',
         quality: 'Premium',
         unit: 'spots',
@@ -235,7 +235,7 @@ export const servicesData = {
       {
         id: 'yt-comments',
         name: 'YouTube Comments',
-        pricePer10k: 510.29,
+        pricePer10k: 11000,
         deliveryTime: '1-24 hours',
         quality: 'Premium',
         unit: 'comments',
@@ -253,7 +253,7 @@ export const servicesData = {
       {
         id: 'tiktok-followers',
         name: 'TikTok Followers',
-        pricePer10k: 140.25,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -264,7 +264,7 @@ export const servicesData = {
       {
         id: 'tiktok-likes',
         name: 'TikTok Likes',
-        pricePer10k: 89.21,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -275,7 +275,7 @@ export const servicesData = {
       {
         id: 'tiktok-views',
         name: 'TikTok Views',
-        pricePer10k: 8.80,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -293,7 +293,7 @@ export const servicesData = {
       {
         id: 'fb-likes',
         name: 'Facebook Likes',
-        pricePer10k: 89.21,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -304,7 +304,7 @@ export const servicesData = {
       {
         id: 'fb-event-attendees',
         name: 'Facebook Event Attendees',
-        pricePer10k: 318.89,
+        pricePer10k: 10000,
         deliveryTime: '2-5 days',
         quality: 'Premium',
         unit: 'attendees',
@@ -315,7 +315,7 @@ export const servicesData = {
       {
         id: 'fb-views',
         name: 'Facebook Views',
-        pricePer10k: 35.64,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -326,7 +326,7 @@ export const servicesData = {
       {
         id: 'fb-followers',
         name: 'Facebook Followers',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -337,7 +337,7 @@ export const servicesData = {
       {
         id: 'fb-shares',
         name: 'Facebook Shares',
-        pricePer10k: 153.01,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'shares',
@@ -348,7 +348,7 @@ export const servicesData = {
       {
         id: 'fb-live-views',
         name: 'Facebook Live Views',
-        pricePer10k: 165.81,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'views',
@@ -359,7 +359,7 @@ export const servicesData = {
       {
         id: 'fb-profile-followers',
         name: 'Facebook Profile Followers',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -370,7 +370,7 @@ export const servicesData = {
       {
         id: 'fb-comments',
         name: 'Facebook Comments',
-        pricePer10k: 216.68,
+        pricePer10k: 11000,
         deliveryTime: '1-24 hours',
         quality: 'Premium',
         unit: 'comments',
@@ -388,7 +388,7 @@ export const servicesData = {
       {
         id: 'twitch-views',
         name: 'Twitch Views',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -399,7 +399,7 @@ export const servicesData = {
       {
         id: 'twitch-live-views',
         name: 'Twitch Live Stream Views',
-        pricePer10k: 306.13,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'views',
@@ -410,7 +410,7 @@ export const servicesData = {
       {
         id: 'twitch-followers',
         name: 'Twitch Followers',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -421,7 +421,7 @@ export const servicesData = {
       {
         id: 'twitch-tax-info',
         name: 'Twitch Tax Information',
-        pricePer10k: 165.81,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'Premium',
         unit: 'service',
@@ -439,7 +439,7 @@ export const servicesData = {
       {
         id: 'spotify-followers',
         name: 'Spotify Followers',
-        pricePer10k: 50.93,
+        pricePer10k: 10000,
         deliveryTime: '5-10 days',
         quality: 'Premium',
         unit: 'followers',
@@ -450,7 +450,7 @@ export const servicesData = {
       {
         id: 'spotify-playlist-followers',
         name: 'Spotify Playlist Followers',
-        pricePer10k: 50.93,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -461,7 +461,7 @@ export const servicesData = {
       {
         id: 'spotify-profile-followers',
         name: 'Spotify Profile Followers',
-        pricePer10k: 50.93,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -472,7 +472,7 @@ export const servicesData = {
       {
         id: 'spotify-plays',
         name: 'Spotify Plays',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'High Quality',
         unit: 'plays',
@@ -483,7 +483,7 @@ export const servicesData = {
       {
         id: 'spotify-playlist-plays',
         name: 'Spotify Playlist Plays',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'High Quality',
         unit: 'plays',
@@ -501,7 +501,7 @@ export const servicesData = {
       {
         id: 'x-likes',
         name: 'X Likes',
-        pricePer10k: 153.01,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -512,7 +512,7 @@ export const servicesData = {
       {
         id: 'x-retweets',
         name: 'X Retweets',
-        pricePer10k: 191.29,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'retweets',
@@ -523,7 +523,7 @@ export const servicesData = {
       {
         id: 'x-votes',
         name: 'X Votes',
-        pricePer10k: 63.69,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'votes',
@@ -534,7 +534,7 @@ export const servicesData = {
       {
         id: 'x-views',
         name: 'X Views',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -545,7 +545,7 @@ export const servicesData = {
       {
         id: 'x-followers',
         name: 'X Followers',
-        pricePer10k: 229.57,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -556,7 +556,7 @@ export const servicesData = {
       {
         id: 'x-live-views',
         name: 'X Live Video Views',
-        pricePer10k: 165.77,
+        pricePer10k: 10000,
         deliveryTime: 'Instant',
         quality: 'Premium',
         unit: 'views',
@@ -574,7 +574,7 @@ export const servicesData = {
       {
         id: 'sc-plays',
         name: 'SoundCloud Plays',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'High Quality',
         unit: 'plays',
@@ -585,7 +585,7 @@ export const servicesData = {
       {
         id: 'sc-downloads',
         name: 'SoundCloud Downloads',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'High Quality',
         unit: 'downloads',
@@ -596,7 +596,7 @@ export const servicesData = {
       {
         id: 'sc-likes',
         name: 'SoundCloud Likes',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -607,7 +607,7 @@ export const servicesData = {
       {
         id: 'sc-followers',
         name: 'SoundCloud Followers',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -618,7 +618,7 @@ export const servicesData = {
       {
         id: 'sc-reposts',
         name: 'SoundCloud Reposts',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'reposts',
@@ -636,7 +636,7 @@ export const servicesData = {
       {
         id: 'lgtv-views',
         name: 'LG TV Views',
-        pricePer10k: 8.80,
+        pricePer10k: 10000,
         deliveryTime: '1-12 hours',
         quality: 'High Quality',
         unit: 'views',
@@ -647,7 +647,7 @@ export const servicesData = {
       {
         id: 'lgtv-likes',
         name: 'LG TV Likes',
-        pricePer10k: 25.41,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -665,7 +665,7 @@ export const servicesData = {
       {
         id: 'linkedin-followers',
         name: 'LinkedIn Followers',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -676,7 +676,7 @@ export const servicesData = {
       {
         id: 'linkedin-likes',
         name: 'LinkedIn Likes',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -694,7 +694,7 @@ export const servicesData = {
       {
         id: 'threads-followers',
         name: 'Threads Followers',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -705,7 +705,7 @@ export const servicesData = {
       {
         id: 'threads-likes',
         name: 'Threads Likes',
-        pricePer10k: 114.73,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -716,7 +716,7 @@ export const servicesData = {
       {
         id: 'threads-reposts',
         name: 'Threads Reposts',
-        pricePer10k: 127.49,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'reposts',
@@ -734,7 +734,7 @@ export const servicesData = {
       {
         id: 'website-traffic',
         name: 'Website Traffic',
-        pricePer10k: 8.80,
+        pricePer10k: 10000,
         deliveryTime: '1-7 days',
         quality: 'High Quality',
         unit: 'visitors',
@@ -752,7 +752,7 @@ export const servicesData = {
       {
         id: 'pinterest-followers',
         name: 'Pinterest Followers',
-        pricePer10k: 255.09,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -763,7 +763,7 @@ export const servicesData = {
       {
         id: 'pinterest-likes',
         name: 'Pinterest Likes',
-        pricePer10k: 76.45,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -781,7 +781,7 @@ export const servicesData = {
       {
         id: 'vk-followers',
         name: 'VK Followers',
-        pricePer10k: 101.97,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -792,7 +792,7 @@ export const servicesData = {
       {
         id: 'vk-group-followers',
         name: 'VK Group Followers',
-        pricePer10k: 101.97,
+        pricePer10k: 10000,
         deliveryTime: '3-7 days',
         quality: 'Premium',
         unit: 'followers',
@@ -803,7 +803,7 @@ export const servicesData = {
       {
         id: 'vk-likes',
         name: 'VK Likes',
-        pricePer10k: 38.17,
+        pricePer10k: 10000,
         deliveryTime: '1-24 hours',
         quality: 'High Quality',
         unit: 'likes',
@@ -821,7 +821,7 @@ export const servicesData = {
       {
         id: 'apple-music-plays',
         name: 'Apple Music Plays',
-        pricePer10k: 255.09,
+        pricePer10k: 10000,
         deliveryTime: '1-3 days',
         quality: 'High Quality',
         unit: 'plays',
@@ -839,7 +839,7 @@ export const servicesData = {
       {
         id: 'seo-guest-posts',
         name: 'SEO Guest Posts',
-        pricePer10k: 275.00,
+        pricePer10k: 10000,
         deliveryTime: '7-14 days',
         quality: 'Premium',
         unit: 'posts',
