@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/illysocial">
+    <BrowserRouter basename="/illysocialV2">
       <AuthProvider>
         <App />
       </AuthProvider>
