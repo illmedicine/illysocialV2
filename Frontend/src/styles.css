@@ -2598,3 +2598,122 @@ html, body {
   }
 }
 
+
+/* ===================================
+   LivePay CTA Banner Styles
+   =================================== */
+
+.livepay-cta-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 25px 30px;
+  margin: 30px auto;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.livepay-cta-banner:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border-color: rgba(240, 147, 251, 0.3);
+}
+
+.livepay-cta-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.livepay-cta-icon {
+  font-size: 48px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.livepay-cta-text {
+  flex: 1;
+}
+
+.livepay-cta-text h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 5px;
+  background: linear-gradient(135deg, #f093fb, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.livepay-cta-text p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0;
+}
+
+.livepay-cta-badge {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.livepay-cta-button {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.livepay-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+@media (max-width: 768px) {
+  .livepay-cta-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .livepay-cta-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .livepay-cta-icon {
+    font-size: 40px;
+  }
+
+  .livepay-cta-text h3 {
+    font-size: 18px;
+  }
+
+  .livepay-cta-button {
+    width: 100%;
+  }
+}
