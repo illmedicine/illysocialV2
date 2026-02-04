@@ -4,12 +4,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ServiceModal from '../components/ServiceModal';
 import DiscordStats from '../components/DiscordStats';
+import LivePay from '../components/LivePay';
 import { servicesData } from '../data/services.js';
 
 const Home = () => {
   const location = useLocation();
   const [selectedService, setSelectedService] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showLivePay, setShowLivePay] = useState(false);
 
    useEffect(() => {
     if (location.state?.scrollTo) {
@@ -186,6 +188,22 @@ const Home = () => {
           <p className="about-text">
             Accelerate social media growth with real followers, likes, views, and engagement. Known for fast delivery, premium quality, and affordable pricing, trusted by million
           </p>
+          
+          {/* LivePay CTA Banner */}
+          <div className="livepay-cta-banner" onClick={() => setShowLivePay(true)}>
+            <div className="livepay-cta-content">
+              <span className="livepay-cta-icon">💰</span>
+              <div className="livepay-cta-text">
+                <h3>LivePay - Discover Your Data&apos;s Value</h3>
+                <p>See how much your personal data is worth. Join the Fair Data Act movement!</p>
+              </div>
+              <span className="livepay-cta-badge">PROTOTYPE</span>
+            </div>
+            <button className="livepay-cta-button">
+              Open Data Wallet →
+            </button>
+          </div>
+
           <div className="cards-container">
             <div className="feature-card">
               <div className="feature-number">01</div>
@@ -460,6 +478,10 @@ const Home = () => {
           onClose={() => setSelectedService(null)}
           onOrder={handleOrder}
         />
+      
+      {showLivePay && (
+        <LivePay onClose={() => setShowLivePay(false)} />
+      )}
       
       <Footer />
     </div>
