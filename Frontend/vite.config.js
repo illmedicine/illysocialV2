@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
-  base: '/isocial/',
+  base: '/illysocialV2/',
   plugins: [react()],
 })
