@@ -3,6 +3,11 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/isocial/*"
+  to = "/isocial/index.html"
   status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/isocial/"
+  status = 301
