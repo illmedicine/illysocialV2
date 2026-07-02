@@ -179,12 +179,13 @@ const Home = () => {
       
       <div className="container">
         <section id="home" className="section">
+          <div className="hero-eyebrow">Illy Robotic Instruments</div>
           <h1 className="illysocial">
             <span className="illy-text">Illy</span>
             <span className="social-text">social</span>
           </h1>
           <p className="about-text">
-            Accelerate social media growth with real followers, likes, views, and engagement. Known for fast delivery, premium quality, and affordable pricing, trusted by million
+            IllySocial is a community-first social platform with built-in data sovereignty and wealth distribution. Buy authentic engagement packages — real followers, likes, views, and shares — fulfilled by real workers, not bots.
           </p>
           <div className="cards-container">
             <div className="feature-card">
@@ -222,6 +223,90 @@ const Home = () => {
               <p className="feature-description">
                 Round the clock support to help you with any questions or issues
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="trust-stats-bar">
+          <div className="trust-stat">
+            <div className="trust-stat-value">Real Workers</div>
+            <div className="trust-stat-label">Zero bots, zero manipulation</div>
+          </div>
+          <div className="trust-stat">
+            <div className="trust-stat-value">Data Sovereign</div>
+            <div className="trust-stat-label">You own your community data</div>
+          </div>
+          <div className="trust-stat">
+            <div className="trust-stat-value">Wealth-Share</div>
+            <div className="trust-stat-label">Workers earn every engagement</div>
+          </div>
+        </section>
+
+        <section className="section trust-grid-section">
+          <div className="trust-section-label">Platform Features</div>
+          <h2 className="section-title">Social engagement the way it was meant to be</h2>
+          <p className="trust-section-sub">
+            IllySocial reimagines social marketing — every interaction is authentic, every worker is compensated, and every brand gets real growth without compromising community trust.
+          </p>
+          <div className="trust-grid">
+            <div className="trust-card">
+              <div className="trust-card-icon">✅</div>
+              <h3 className="trust-card-title">Verified Engagement Packages</h3>
+              <p className="trust-card-desc">Buy likes, follows, comments, and shares — all fulfilled by verified human workers completing real tasks through DisCryptoBank.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon">🏦</div>
+              <h3 className="trust-card-title">Community Wealth Distribution</h3>
+              <p className="trust-card-desc">Every engagement purchase flows directly to workers as Solana cryptocurrency — putting money back into the community.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon">🔐</div>
+              <h3 className="trust-card-title">Data Sovereignty</h3>
+              <p className="trust-card-desc">Your community data stays yours. No hidden resale, no third-party surveillance — full transparency on how your data is used.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon">⚡</div>
+              <h3 className="trust-card-title">DisCryptoBank Integration</h3>
+              <p className="trust-card-desc">Powered by the Illy Robotic payroll engine — autonomous proof verification and instant SOL payouts keep the system honest.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon">📣</div>
+              <h3 className="trust-card-title">Authentic Testimonials</h3>
+              <p className="trust-card-desc">Every engagement comes with verifiable proof — screenshot, URL, and timestamp — so you always know it's real.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon">🌐</div>
+              <h3 className="trust-card-title">Ecosystem-Native</h3>
+              <p className="trust-card-desc">Deep integration with SocialPlug, Coindrop, and Livepay — the full Illy Robotic stack working together for your brand.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="trust-split-section">
+          <div className="trust-split">
+            <div className="trust-split-col">
+              <div className="trust-section-label">The IllySocial Difference</div>
+              <h3>What you get with IllySocial</h3>
+              <ul className="trust-split-list">
+                <li>Authentic engagement from verified human workers worldwide</li>
+                <li>Instant SOL payouts to every worker — no delays, no middlemen</li>
+                <li>Full proof-of-work for every task (URL + screenshot verification)</li>
+                <li>Community data stays private and owned by you</li>
+                <li>Wealth distributed back into the worker community</li>
+                <li>Plug-and-play with the entire Illy Robotic ecosystem</li>
+              </ul>
+            </div>
+            <div className="trust-split-col">
+              <div className="trust-section-label">What you leave behind</div>
+              <h3>Legacy social platforms vs. IllySocial</h3>
+              <ul className="trust-split-list">
+                <li>No bot farms or fake engagement that hurts your algorithm standing</li>
+                <li>No opaque data brokerage behind your community's backs</li>
+                <li>No engagement fees flowing to platform shareholders</li>
+                <li>No unverified "influencer" metrics that can't be proven</li>
+                <li>No lock-in to closed proprietary ecosystems</li>
+                <li>No bloated ad spend replacing what community can do</li>
+              </ul>
             </div>
           </div>
         </section>
