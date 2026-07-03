@@ -1,0 +1,882 @@
+/* LivePay Component Styles */
+
+.livepay-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.livepay-modal {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.livepay-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: #666;
+}
+
+.livepay-close:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Progress Indicator */
+.livepay-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  position: relative;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+  background: white;
+  color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.progress-step.current .step-number {
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.step-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.progress-step.active .step-label {
+  color: white;
+}
+
+.progress-line {
+  position: absolute;
+  bottom: 50px;
+  left: 60px;
+  right: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #00d4ff, #f093fb);
+  z-index: 1;
+  transition: width 0.5s ease;
+  border-radius: 3px;
+}
+
+/* Content Area */
+.livepay-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 40px;
+}
+
+.livepay-step {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.step-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.livepay-step h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.prototype-banner {
+  margin-bottom: 20px;
+}
+
+.prototype-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.step-description {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.step-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  line-height: 1.7;
+}
+
+.info-box {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.info-box h4 {
+  font-size: 16px;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box li {
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.info-box li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 700;
+}
+
+.disclaimer {
+  background: rgba(245, 87, 108, 0.1);
+  border-left: 4px solid var(--accent-color);
+  padding: 15px 20px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Data Calculator - Step 2 */
+.data-calculator {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.calculator-item {
+  margin-bottom: 20px;
+}
+
+.calculator-item:last-child {
+  margin-bottom: 0;
+}
+
+.calculator-item label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.value-display {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 3px 12px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.calculator-item input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e9ecef;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.calculator-item input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.calculator-item input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.calculator-item input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  border: none;
+}
+
+.estimated-value-preview {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  color: white;
+}
+
+.estimated-value-preview p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.value-amount {
+  font-size: 48px;
+  font-weight: 700;
+  display: block;
+  margin: 10px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.value-annual {
+  font-size: 15px;
+  margin-top: 10px;
+  opacity: 0.95;
+}
+
+/* Policy Section - Step 3 */
+.policy-section {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.policy-section h3 {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.policy-section > p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.policy-points {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.policy-point {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.point-icon {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.policy-point strong {
+  display: block;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.policy-point p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.petition-info {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+}
+
+.petition-info p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* Acknowledgment Section - Step 4 */
+.acknowledgment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.checkbox-card {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-card.checked {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.checkbox-card.mandatory {
+  border-color: #f59e0b;
+}
+
+.checkbox-card.mandatory.checked {
+  border-color: #10b981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+}
+
+.checkbox-label {
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-top: 2px;
+}
+
+.checkbox-label input:checked + .checkmark {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: var(--primary-color);
+}
+
+.checkbox-label input:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.checkbox-content {
+  flex: 1;
+}
+
+.checkbox-content strong {
+  display: block;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.required-badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.optional-badge {
+  display: inline-block;
+  background: #6b7280;
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.checkbox-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
+  line-height: 1.6;
+}
+
+.petition-note {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.warning-message {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d97706;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Wallet View - Step 5 */
+.wallet-step {
+  padding: 0;
+}
+
+.wallet-container {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+}
+
+.wallet-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.wallet-icon {
+  font-size: 56px;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
+  50% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
+}
+
+.wallet-header h2 {
+  font-size: 32px;
+  margin: 15px 0 10px;
+  background: linear-gradient(135deg, #f093fb, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.prototype-label {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.wallet-balance {
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.balance-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.balance-amount {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+}
+
+.balance-amount .currency {
+  font-size: 32px;
+  font-weight: 300;
+  color: #00d4ff;
+  margin-top: 10px;
+}
+
+.balance-amount .amount {
+  font-size: 64px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f093fb, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.balance-annual {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 15px 0 0;
+}
+
+.balance-annual strong {
+  color: #00d4ff;
+}
+
+.wallet-breakdown {
+  margin-bottom: 25px;
+}
+
+.wallet-breakdown h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.breakdown-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.breakdown-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.item-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.item-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+.petition-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.petition-success span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.petition-success p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.petition-success p:first-of-type {
+  margin-bottom: 5px;
+}
+
+.wallet-disclaimer {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.wallet-disclaimer p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.wallet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.action-btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Navigation Buttons */
+.livepay-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-top: 1px solid #e9ecef;
+  background: white;
+}
+
+.livepay-navigation .nav-btn {
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.livepay-navigation .nav-btn.back {
+  background: #f1f5f9;
+  color: var(--text-muted);
+}
+
+.livepay-navigation .nav-btn.back:hover {
+  background: #e2e8f0;
+}
+
+.livepay-navigation .nav-btn.next {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  margin-left: auto;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.livepay-navigation .nav-btn.next:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.livepay-navigation .nav-btn.next.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .livepay-modal {
+    max-height: 100vh;
+    border-radius: 0;
+    height: 100vh;
+  }
+
+  .livepay-progress {
+    padding: 20px;
+  }
+
+  .step-label {
+    display: none;
+  }
+
+  .progress-line {
+    bottom: 38px;
+    left: 40px;
+    right: 40px;
+  }
+
+  .livepay-content {
+    padding: 20px;
+  }
+
+  .step-icon {
+    font-size: 36px;
+  }
+
+  .livepay-step h2 {
+    font-size: 22px;
+  }
+
+  .value-amount {
+    font-size: 36px;
+  }
+
+  .breakdown-items {
+    grid-template-columns: 1fr;
+  }
+
+  .balance-amount .amount {
+    font-size: 48px;
+  }
+
+  .balance-amount .currency {
+    font-size: 24px;
+    margin-top: 8px;
+  }
+
+  .livepay-navigation {
+    padding: 15px 20px;
+  }
+
+  .livepay-navigation .nav-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
