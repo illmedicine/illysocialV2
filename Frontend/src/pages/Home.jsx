@@ -4,12 +4,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ServiceModal from '../components/ServiceModal';
 import DiscordStats from '../components/DiscordStats';
+import EcosystemModal from '../components/EcosystemEngine';
 import { servicesData } from '../data/services.js';
 
 const Home = () => {
   const location = useLocation();
   const [selectedService, setSelectedService] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showEngine, setShowEngine] = useState(false);
 
    useEffect(() => {
     if (location.state?.scrollTo) {
@@ -311,6 +313,56 @@ const Home = () => {
           </div>
         </section>
 
+        <section id="ecosystem" className="partners-section">
+          <div className="trust-section-label">Illy Robotic Ecosystem</div>
+          <h2 className="section-title">IllySocial is the entry point for the CoinDrop engine</h2>
+          <p className="trust-section-sub">
+            Every purchase on IllySocial kicks off an automated cascade across five Illy Robotic products —
+            DisCryptoBank, CoinDrop, IRIS Automations, and Social Plug all fire in parallel to turn your budget
+            into real engagement, real payouts, and real SEO footprint.
+          </p>
+
+          <div className="partners-grid">
+            <div className="partner-card">
+              <div className="partner-icon">💬</div>
+              <div className="partner-name">Featured Discord: CoinDrop</div>
+              <div className="partner-desc">Join the 100k+ member network where paid engagement tasks get fulfilled in real time.</div>
+              <a className="partner-btn discord" href="https://discord.gg/847XjyVa3C" target="_blank" rel="noopener noreferrer">Join Discord ↗</a>
+            </div>
+            <div className="partner-card">
+              <div className="partner-icon">🪙</div>
+              <div className="partner-name">CoinDrop Partner Portal</div>
+              <div className="partner-desc">IllySocial is the frontend injection machine for CoinDrop — get paid to engage with social content.</div>
+              <a className="partner-btn coindrop" href="https://coindrop.in/" target="_blank" rel="noopener noreferrer">Visit CoinDrop.IN ↗</a>
+            </div>
+            <div className="partner-card">
+              <div className="partner-icon">🏦</div>
+              <div className="partner-name">DisCryptoBank</div>
+              <div className="partner-desc">The payroll engine — autonomous proof verification and instant SOL payouts for every worker.</div>
+              <a className="partner-btn" href="https://dcb-gm.com/" target="_blank" rel="noopener noreferrer">dcb-gm.com ↗</a>
+            </div>
+            <div className="partner-card">
+              <div className="partner-icon">🎬</div>
+              <div className="partner-name">IRIS Automations</div>
+              <div className="partner-desc">Auto-generates each client's Creators Corner — a homepage and content hub for super fans.</div>
+              <a className="partner-btn" href="http://illy-ris.com/movie.html" target="_blank" rel="noopener noreferrer">illy-ris.com ↗</a>
+            </div>
+            <div className="partner-card">
+              <div className="partner-icon">📣</div>
+              <div className="partner-name">Social Plug</div>
+              <div className="partner-desc">Automated auto-replies and ad campaigns that turn followers into paid engagers.</div>
+              <a className="partner-btn" href="https://illmedicine.github.io/SocialPlug/" target="_blank" rel="noopener noreferrer">Launch Social Plug ↗</a>
+            </div>
+          </div>
+
+          <div className="engine-cta-wrap">
+            <button className="engine-cta-btn" onClick={() => setShowEngine(true)}>
+              ▶ See How The $50 Ecosystem Works
+            </button>
+            <div className="engine-cta-note">A 20-second animated walkthrough of the full automation cascade</div>
+          </div>
+        </section>
+
                 <section id="membership" className="section membership-section">
           <h2 className="section-title">Choose Your Plan</h2>
           <div className="membership-cards">
@@ -540,12 +592,14 @@ const Home = () => {
         </section>
       </div>
 
-      <ServiceModal 
+      <ServiceModal
           service={selectedService}
           onClose={() => setSelectedService(null)}
           onOrder={handleOrder}
         />
-      
+
+      {showEngine && <EcosystemModal onClose={() => setShowEngine(false)} />}
+
       <Footer />
     </div>
   );
