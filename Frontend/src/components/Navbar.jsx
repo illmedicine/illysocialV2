@@ -82,11 +82,26 @@ const Navbar = () => {
         {currentUser ? (
           <div className="profile-menu-container" ref={profileRef}>
             <div className="profile-icon" onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
-              {currentUser.email[0].toUpperCase()}
+              {currentUser.photoURL ? (
+                <img
+                  src={currentUser.photoURL}
+                  alt={currentUser.displayName || "Profile"}
+                  referrerPolicy="no-referrer"
+                  style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
+                />
+              ) : (
+                (currentUser.displayName || currentUser.email || "C")[0].toUpperCase()
+              )}
             </div>
             {profileMenuOpen && (
               <div className="profile-dropdown">
                 <div className="dropdown-email">{currentUser.email}</div>
+                <button
+                  className="nav-btn"
+                  onClick={() => { setProfileMenuOpen(false); navigate("/dashboard"); }}
+                >
+                  Creators Dashboard
+                </button>
                 <button className="dropdown-signout" onClick={handleSignOut}>
                   Sign Out
                 </button>
@@ -94,10 +109,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <>
-            <button className="nav-btn" onClick={() => handleNavigation("signup")}>Sign Up</button>
-            <button className="nav-btn" onClick={() => handleNavigation("signin")}>Sign In</button>
-          </>
+          <button className="nav-btn" onClick={() => handleNavigation("signin")}>Sign In</button>
         )}
       </div>
       <div className={`menu-toggle ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
