@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC9LF6WOnmpbIctA5kH0_rl2lj2i2NoQg0",
-  authDomain: "illysocial.firebaseapp.com",
-  projectId: "illysocial",
-  storageBucket: "illysocial.appspot.com",
-  messagingSenderId: "356649909111",
-  appId: "1:356649909111:web:73477014e0df82c5f4bf72",
-  measurementId: "G-QYSQ53BZ5J"
+  apiKey: "AIzaSyCRstsuTftQXtJ2VIxnhYroPkRBr5wHoKY",
+  authDomain: "isocial-e5297.firebaseapp.com",
+  projectId: "isocial-e5297",
+  storageBucket: "isocial-e5297.firebasestorage.app",
+  messagingSenderId: "391798877995",
+  appId: "1:391798877995:web:b0d682c0a84954d4801f6e",
+  measurementId: "G-T9TWBRF35K"
 };
 
 // Initialize Firebase
