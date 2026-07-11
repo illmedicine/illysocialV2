@@ -11,7 +11,7 @@ export const STATIONS = [
     name: 'Illy Social',
     role: 'The Entry Point',
     tagline: 'A creator injects $50 for a pay-as-you-go growth package. The cascade begins here.',
-    logo: 'illysocial.png',
+    logo: 'illysocial.png', // no WebP version (already optimized)
     color: '#8b7bff',
     accent: '#c4b5fd',
   },
@@ -21,7 +21,7 @@ export const STATIONS = [
     name: 'DisCryptoBank',
     role: 'The Task Generators',
     tagline: 'The budget splits into 1,000 micro-bounties routed to a 100k+ member Discord network.',
-    logo: 'discryptobank.png',
+    logo: 'discryptobank.webp', // 245 KB → 25 KB
     color: '#22d3ee',
     accent: '#67e8f9',
   },
@@ -31,7 +31,7 @@ export const STATIONS = [
     name: 'CoinDrop',
     role: 'Global Monetization',
     tagline: 'Tasks list across the worldwide engagement market — real workers, instant SOL payouts.',
-    logo: 'coindrop.png',
+    logo: 'coindrop.webp', // 2.2 MB → 51 KB !!!
     color: '#f59e0b',
     accent: '#fcd34d',
   },
@@ -41,7 +41,7 @@ export const STATIONS = [
     name: 'IRIS Automations',
     role: 'The Content Hub',
     tagline: 'Auto-builds a Creators Corner — a high-speed content CDN that captures the incoming traffic.',
-    logo: 'i-rislogo.png',
+    logo: 'i-rislogo.webp', // 434 KB → 111 KB
     color: '#a78bfa',
     accent: '#ddd6fe',
   },
@@ -51,7 +51,7 @@ export const STATIONS = [
     name: 'Social Plug',
     role: 'The Viral Multiplier',
     tagline: 'Auto-replies and ad campaigns turn followers into paid engagers across every platform.',
-    logo: 'SocialPlug.png',
+    logo: 'SocialPlug.webp', // 271 KB → 43 KB
     color: '#34d399',
     accent: '#6ee7b7',
   },

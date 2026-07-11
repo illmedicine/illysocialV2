@@ -3,8 +3,18 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
-  // Default base is root for the standalone Firebase Hosting site (isocial-e5297).
-  // The illyrobotic-ai.com apex CI overrides this with `--base=/isocial/`.
   base: '/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate Three.js + R3F vendor chunk (lazy load on lab visit)
+          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'],
+          // React core vendor
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 })
