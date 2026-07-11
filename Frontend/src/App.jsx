@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import RndLab from './pages/RndLab';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
+import CreatorSetup from './pages/CreatorSetup';
 import CreatorsDashboard from './pages/CreatorsDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -17,6 +18,14 @@ function App() {
         {/* Google-only auth — both routes render the same sign-in screen. */}
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Login />} />
+        <Route
+          path="/creator-setup"
+          element={
+            <ProtectedRoute>
+              <CreatorSetup />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
