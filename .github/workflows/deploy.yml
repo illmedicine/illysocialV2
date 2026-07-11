@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
+# Hosting has been migrated to Firebase Hosting (see Frontend/firebase.json).
+# The GitHub Pages auto-deploy on push is disabled to avoid a second, stale
+# host. This workflow can still be triggered manually if ever needed.
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:

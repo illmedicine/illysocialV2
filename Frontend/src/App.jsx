@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import RndLab from './pages/RndLab';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import CreatorsDashboard from './pages/CreatorsDashboard';
@@ -9,7 +10,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* The immersive Illy R&D Labs walk is the landing; the storefront moves to /explore. */}
+        <Route path="/" element={<RndLab />} />
+        <Route path="/explore" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         {/* Google-only auth — both routes render the same sign-in screen. */}
         <Route path="/signin" element={<Login />} />

@@ -15,24 +15,24 @@ const Navbar = () => {
     const scrollSections = ["shop", "about", "contact"];
 
     if (scrollSections.includes(type)) {
-      if (location.pathname === "/") {
-        // If on home page, scroll to section
+      if (location.pathname === "/explore") {
+        // If on the storefront, scroll to section
         const element = document.getElementById(type);
         if (element) {
           element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       } else {
-        // If on another page, navigate to home and pass section to scroll to
-        navigate("/", { state: { scrollTo: type } });
+        // Otherwise navigate to the storefront and pass the section to scroll to
+        navigate("/explore", { state: { scrollTo: type } });
       }
     } else {
       // Handle regular page navigation
       switch (type) {
         case "home":
-          if (location.pathname === "/") {
+          if (location.pathname === "/explore") {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
-            navigate("/");
+            navigate("/explore");
           }
           break;
         case "signup":
