@@ -23,6 +23,10 @@ function OnboardingModal({ currentUser, onComplete }) {
   const [error, setError] = useState('');
   const [paypalLoaded, setPaypalLoaded] = useState(false);
 
+  // Test mode: bypass payment for specific email
+  const isTestUser = currentUser?.email === 'demarkuswilsone@gmail.com';
+  const shouldSkipPayment = isTestUser;
+
   // Step 0: Dashboard tour
   // Step 1: YouTube
   // Step 2: Instagram
@@ -73,6 +77,8 @@ function OnboardingModal({ currentUser, onComplete }) {
       case 3:
         return instagramUrl.trim() ? nicknameValid?.success : true;
       case 4:
+        // Test mode: skip payment requirement
+        if (shouldSkipPayment) return true;
         return paymentComplete;
       default:
         return false;
@@ -156,6 +162,13 @@ function OnboardingModal({ currentUser, onComplete }) {
           if (container) {
             container.innerHTML = '';
           }
+
+          // Listen for payment completion
+          window.paypalOnCompleteCallback = () => {
+            setPaymentComplete(true);
+            setError('');
+          };
+
           window.paypal.HostedButtons({
             hostedButtonId: PAYPAL_BUTTON_ID,
           }).render('#paypal-container-NBD7CEP5TEYXN');
@@ -169,6 +182,17 @@ function OnboardingModal({ currentUser, onComplete }) {
       };
     }
   }, [step, paypalLoaded]);
+
+  // Auto-complete if payment is made or test user
+  useEffect(() => {
+    if ((paymentComplete || shouldSkipPayment) && step === 4) {
+      // Auto-advance to completion
+      const timer = setTimeout(() => {
+        handleComplete();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [paymentComplete, shouldSkipPayment, step]);
 
   return (
     <div className="onboarding-overlay">
@@ -305,17 +329,45 @@ function OnboardingModal({ currentUser, onComplete }) {
           <div className="onboarding-content">
             <h2>Step 4: Activate Your Creator Profile</h2>
             <p>One-time $5 fee to unlock your Creators Corner & integrations</p>
-            <div className="paypal-container">
-              <div id="paypal-container-NBD7CEP5TEYXN"></div>
-            </div>
-            {paypalLoaded && (
-              <p style={{ textAlign: 'center', color: '#7c85b8', fontSize: '13px', marginTop: '12px' }}>
-                After payment, click below to activate your profile
-              </p>
+            {shouldSkipPayment ? (
+              <div style={{
+                padding: '20px',
+                background: 'rgba(52, 211, 153, 0.1)',
+                border: '1px solid rgba(52, 211, 153, 0.3)',
+                borderRadius: '10px',
+                textAlign: 'center',
+                color: '#34d399'
+              }}>
+                <p style={{ margin: 0, fontSize: '14px', fontWeight: '600' }}>
+                  ✓ Test Mode: Skipping payment verification
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="paypal-container">
+                  <div id="paypal-container-NBD7CEP5TEYXN"></div>
+                </div>
+                {paypalLoaded && !paymentComplete && (
+                  <p style={{ textAlign: 'center', color: '#7c85b8', fontSize: '13px', marginTop: '12px' }}>
+                    Complete payment above to activate your profile automatically
+                  </p>
+                )}
+              </>
             )}
-            <button className="payment-complete-btn" onClick={() => setPaymentComplete(true)}>
-              {paypalLoaded ? 'Payment Complete? Click Here' : 'Loading Payment...'}
-            </button>
+            {paymentComplete && (
+              <div style={{
+                padding: '16px',
+                background: 'rgba(52, 211, 153, 0.1)',
+                border: '1px solid rgba(52, 211, 153, 0.3)',
+                borderRadius: '10px',
+                textAlign: 'center',
+                color: '#34d399',
+                fontSize: '14px',
+                fontWeight: '600'
+              }}>
+                ✓ Payment received! Setting up your profile...
+              </div>
+            )}
           </div>
         )}
 
