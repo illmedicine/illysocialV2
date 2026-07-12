@@ -1,4 +1,5 @@
-// YouTube & Instagram validation with scraping (Phase 2.1)
+// YouTube & Instagram validation (Phase 2.1)
+// Client-side format validation + basic checks (no CORS-blocked fetches)
 
 export const validateYouTubeHandle = async (handle) => {
   if (!handle || handle.trim().length === 0) {
@@ -7,35 +8,18 @@ export const validateYouTubeHandle = async (handle) => {
 
   const cleanHandle = handle.trim().replace(/^@/, '');
 
-  try {
-    // Fetch the channel page and check if it contains channel metadata
-    const url = `https://www.youtube.com/@${encodeURIComponent(cleanHandle)}`;
-    const response = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
-    });
-
-    if (response.status === 404) {
-      return { valid: false, error: 'YouTube channel not found' };
-    }
-
-    // Check if we got a valid HTML response
-    if (response.ok) {
-      const html = await response.text();
-      // YouTube loads channel name in the title tag or initial data
-      if (html.includes('yt-formatted-string') || html.includes('ytInitialData')) {
-        return { valid: true, handle: cleanHandle };
-      }
-      // Also accept if we just got a successful response (no 404)
-      return { valid: true, handle: cleanHandle };
-    }
-
-    return { valid: false, error: 'Could not verify YouTube channel. Please check the handle and try again.' };
-  } catch (err) {
-    console.error('YouTube validation error:', err);
-    return { valid: false, error: 'Network error. Please check the handle and try again.' };
+  // Validate YouTube handle format
+  // YouTube handles can contain letters, numbers, underscores, hyphens, and periods
+  if (!/^[a-zA-Z0-9._-]{3,30}$/.test(cleanHandle)) {
+    return {
+      valid: false,
+      error: 'YouTube handle must be 3-30 characters (letters, numbers, _, -, .)'
+    };
   }
+
+  // For now, accept valid format as verification
+  // In production, this should use a backend API to verify the channel actually exists
+  return { valid: true, handle: cleanHandle };
 };
 
 export const validateInstagramHandle = async (url) => {
@@ -51,39 +35,25 @@ export const validateInstagramHandle = async (url) => {
       handle = handle.split('instagram.com/')[1].replace(/\/$/, '').replace(/[?#].*/, '').split('/')[0];
     }
 
-    // Validate handle format
+    // Validate Instagram handle format (usernames can be 1-30 chars)
+    // Valid characters: letters, numbers, periods, underscores
     if (!/^[a-zA-Z0-9._]{1,30}$/.test(handle)) {
       return { valid: false, error: 'Invalid Instagram handle format' };
     }
 
-    // Fetch the Instagram profile page
-    const profileUrl = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
-    const response = await fetch(profileUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
-    });
-
-    // Instagram returns 404 for non-existent profiles
-    if (response.status === 404) {
-      return { valid: false, error: 'Instagram profile not found' };
+    // Check for common invalid patterns
+    if (handle.startsWith('.') || handle.endsWith('.')) {
+      return { valid: false, error: 'Username cannot start or end with a period' };
     }
 
-    // Check if we got a valid response
-    if (response.ok) {
-      const html = await response.text();
-      // Check for profile indicators in the response
-      if (html.includes('profile') || html.includes('instagram')) {
-        return { valid: true, handle, url: profileUrl };
-      }
-      // Accept successful response even if we can't verify content
-      return { valid: true, handle, url: profileUrl };
-    }
+    const profileUrl = `https://www.instagram.com/${handle}/`;
 
-    return { valid: false, error: 'Could not verify Instagram profile. Please check the URL.' };
+    // For now, accept valid format as verification
+    // In production, this should use a backend API to verify the profile actually exists
+    return { valid: true, handle, url: profileUrl };
   } catch (err) {
     console.error('Instagram validation error:', err);
-    return { valid: false, error: 'Network error. Please check the URL and try again.' };
+    return { valid: false, error: 'Invalid Instagram URL format' };
   }
 };
 
