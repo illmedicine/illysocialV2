@@ -18,6 +18,7 @@ function OnboardingModal({ currentUser, onComplete }) {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [paypalLoaded, setPaypalLoaded] = useState(false);
 
   // Step 0: Dashboard tour
   // Step 1: YouTube
@@ -107,6 +108,34 @@ function OnboardingModal({ currentUser, onComplete }) {
     }
     setLoading(false);
   };
+
+  // Load PayPal SDK when we reach payment step
+  useEffect(() => {
+    if (step === 4 && !paypalLoaded) {
+      const script = document.createElement('script');
+      script.src = 'https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt5Qs30l2ijabxV5OlqaH0hqrHIqrzQDvW08zxsuR979-8DNyVzXwpa';
+      script.async = true;
+      script.onload = () => {
+        setPaypalLoaded(true);
+        if (window.paypal) {
+          // Clear any existing buttons and render fresh
+          const container = document.getElementById('paypal-container-NBD7CEP5TEYXN');
+          if (container) {
+            container.innerHTML = '';
+          }
+          window.paypal.HostedButtons({
+            hostedButtonId: PAYPAL_BUTTON_ID,
+          }).render('#paypal-container-NBD7CEP5TEYXN');
+        }
+      };
+      document.body.appendChild(script);
+      return () => {
+        if (document.body.contains(script)) {
+          document.body.removeChild(script);
+        }
+      };
+    }
+  }, [step, paypalLoaded]);
 
   return (
     <div className="onboarding-overlay">
@@ -245,20 +274,14 @@ function OnboardingModal({ currentUser, onComplete }) {
             <p>One-time $5 fee to unlock your Creators Corner & integrations</p>
             <div className="paypal-container">
               <div id="paypal-container-NBD7CEP5TEYXN"></div>
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    if (window.paypal) {
-                      paypal.HostedButtons({
-                        hostedButtonId: "${PAYPAL_BUTTON_ID}",
-                      }).render("#paypal-container-NBD7CEP5TEYXN");
-                    }
-                  `,
-                }}
-              />
             </div>
+            {paypalLoaded && (
+              <p style={{ textAlign: 'center', color: '#7c85b8', fontSize: '13px', marginTop: '12px' }}>
+                After payment, click below to activate your profile
+              </p>
+            )}
             <button className="payment-complete-btn" onClick={() => setPaymentComplete(true)}>
-              Payment Complete? Click Here
+              {paypalLoaded ? 'Payment Complete? Click Here' : 'Loading Payment...'}
             </button>
           </div>
         )}
