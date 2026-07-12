@@ -1,23 +1,64 @@
 .creator-setup {
-  min-height: 100dvh;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1350 100%);
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: #04050d;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   font-family: 'Inter', system-ui, sans-serif;
   color: #e7e9f5;
+  overflow: hidden;
+}
+
+/* Grid background (matching R&D Labs) */
+.creator-setup::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(0deg, transparent 24%, rgba(139, 123, 255, 0.05) 25%, rgba(139, 123, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 123, 255, 0.05) 75%, rgba(139, 123, 255, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(139, 123, 255, 0.05) 25%, rgba(139, 123, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 123, 255, 0.05) 75%, rgba(139, 123, 255, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Stars/sparkles */
+.creator-setup::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #8b7bff, rgba(139, 123, 255, 0.3)),
+    radial-gradient(2px 2px at 60px 70px, #22d3ee, rgba(34, 211, 238, 0.3)),
+    radial-gradient(1px 1px at 50px 50px, #f093fb, rgba(240, 147, 251, 0.2)),
+    radial-gradient(1px 1px at 130px 80px, #8b7bff, rgba(139, 123, 255, 0.2));
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  animation: twinkle 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
 }
 
 .setup-container {
+  position: relative;
+  z-index: 10;
   width: 100%;
-  max-width: 640px;
-  background: rgba(15, 15, 35, 0.8);
-  border: 1px solid rgba(139, 123, 255, 0.2);
-  border-radius: 24px;
-  padding: 40px;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  max-width: 680px;
+  background: rgba(9, 12, 26, 0.7);
+  border: 1px solid rgba(139, 123, 255, 0.35);
+  border-radius: 28px;
+  padding: 48px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 80px rgba(124, 92, 255, 0.25), inset 0 0 60px rgba(124, 92, 255, 0.1);
 }
 
 .setup-header {
@@ -26,13 +67,15 @@
 }
 
 .setup-header h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 900;
   margin: 0 0 12px;
-  background: linear-gradient(90deg, #8b7bff, #22d3ee);
+  letter-spacing: -0.5px;
+  background: linear-gradient(100deg, #8b7bff 10%, #22d3ee 55%, #f093fb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  text-shadow: 0 0 30px rgba(139, 123, 255, 0.3);
 }
 
 .setup-header p {
@@ -76,13 +119,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  background: linear-gradient(90deg, #7c5cff, #22d3ee);
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  background: linear-gradient(135deg, #7c5cff, #22d3ee);
   border-radius: 50%;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 22px;
+  box-shadow: 0 0 20px rgba(124, 92, 255, 0.5);
 }
 
 .setup-step.completed .step-number {

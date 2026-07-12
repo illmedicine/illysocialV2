@@ -144,8 +144,8 @@ export default function CreatorSetup() {
     <div className="creator-setup">
       <div className="setup-container">
         <div className="setup-header">
-          <h1>Create Your Creator Profile</h1>
-          <p>Complete these steps to activate your IllySocial Creator Dashboard</p>
+          <h1>Creator Onboarding</h1>
+          <p>Activate your Illy Social R&D Labs — connect your YouTube & Instagram, then launch your custom Creators Corner fanpage</p>
         </div>
 
         {error && <div className="setup-error">{error}</div>}
@@ -155,8 +155,8 @@ export default function CreatorSetup() {
           <div className={`setup-step ${step === 1 ? 'active' : 'completed'}`}>
             <div className="step-number">1</div>
             <div className="step-content">
-              <h2>YouTube Channel</h2>
-              <p>Enter your YouTube handle (e.g., @YourChannelName)</p>
+              <h2>Step 1: Your YouTube Channel</h2>
+              <p>Where your content lives. Enter your YouTube handle.</p>
               <div className="input-group">
                 <input
                   type="text"
@@ -189,8 +189,8 @@ export default function CreatorSetup() {
           <div className={`setup-step ${step === 2 ? 'active' : 'completed'}`}>
             <div className="step-number">2</div>
             <div className="step-content">
-              <h2>Instagram Profile (Optional)</h2>
-              <p>Enter your public Instagram profile URL</p>
+              <h2>Step 2: Instagram Profile (Optional)</h2>
+              <p>Connect your audience. Leave blank to skip.</p>
               <div className="input-group">
                 <input
                   type="text"
@@ -224,8 +224,8 @@ export default function CreatorSetup() {
           <div className={`setup-step ${step === 3 ? 'active' : 'completed'}`}>
             <div className="step-number">3</div>
             <div className="step-content">
-              <h2>Creators Corner Nickname</h2>
-              <p>Your custom fanpage URL: illy-ris.com/movie/[YOUR-NICKNAME]/</p>
+              <h2>Step 3: Your Creators Corner</h2>
+              <p>Custom fanpage powered by Illy R&D Labs AI. URL: illy-ris.com/movie/[your-name]/</p>
               <div className="input-group">
                 <input
                   type="text"
@@ -260,8 +260,8 @@ export default function CreatorSetup() {
           <div className={`setup-step ${step === 4 ? 'active' : 'completed'}`}>
             <div className="step-number">4</div>
             <div className="step-content">
-              <h2>Creator Onboarding ($5)</h2>
-              <p>One-time fee to set up your custom backend integrations</p>
+              <h2>Step 4: Complete Your Setup</h2>
+              <p>One-time $5 fee unlocks your custom Creators Corner, AI-powered by your YouTube & Instagram</p>
 
               {!paymentComplete ? (
                 <div className="paypal-container">
