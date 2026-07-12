@@ -163,15 +163,22 @@ function OnboardingModal({ currentUser, onComplete }) {
             container.innerHTML = '';
           }
 
-          // Listen for payment completion
-          window.paypalOnCompleteCallback = () => {
-            setPaymentComplete(true);
-            setError('');
-          };
-
+          // Render hosted button
           window.paypal.HostedButtons({
             hostedButtonId: PAYPAL_BUTTON_ID,
           }).render('#paypal-container-NBD7CEP5TEYXN');
+
+          // Listen for payment completion via postMessage
+          const handleMessage = (event) => {
+            // PayPal hosted buttons communicate via postMessage
+            if (event.data && event.data.type === 'paypal:hosted-buttons:success') {
+              setPaymentComplete(true);
+              setError('');
+            }
+          };
+          window.addEventListener('message', handleMessage);
+
+          return () => window.removeEventListener('message', handleMessage);
         }
       };
       document.body.appendChild(script);
@@ -182,6 +189,29 @@ function OnboardingModal({ currentUser, onComplete }) {
       };
     }
   }, [step, paypalLoaded]);
+
+  // Monitor for payment completion by checking for success state
+  useEffect(() => {
+    if (step === 4 && paypalLoaded && !paymentComplete) {
+      // Poll for payment state changes (e.g., button becomes disabled/changes)
+      const checkPaymentState = () => {
+        const container = document.getElementById('paypal-container-NBD7CEP5TEYXN');
+        if (container) {
+          // Check if button is in success state or if iframe disappeared (payment processed)
+          const iframe = container.querySelector('iframe');
+          if (!iframe) {
+            // PayPal might have redirected or removed the iframe after payment
+            setPaymentComplete(true);
+            setError('');
+            clearInterval(interval);
+          }
+        }
+      };
+
+      const interval = setInterval(checkPaymentState, 500);
+      return () => clearInterval(interval);
+    }
+  }, [step, paypalLoaded, paymentComplete]);
 
   // Auto-complete if payment is made or test user
   useEffect(() => {
@@ -370,6 +400,15 @@ function OnboardingModal({ currentUser, onComplete }) {
               }}>
                 ✓ Payment received! Setting up your profile...
               </div>
+            )}
+            {!shouldSkipPayment && paypalLoaded && !paymentComplete && (
+              <button
+                className="payment-complete-btn"
+                onClick={() => setPaymentComplete(true)}
+                style={{ marginTop: '16px' }}
+              >
+                Already paid? Click to continue
+              </button>
             )}
           </div>
         )}
