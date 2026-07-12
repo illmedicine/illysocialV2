@@ -1,17 +1,319 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
+import {
+  validateYouTubeHandle,
+  validateInstagramHandle,
+  validateCreatorsCornerNickname,
+} from '../services/validationService';
+import './CreatorsDashboard.css';
 
-const PLATFORMS = ["instagram", "youtube", "tiktok", "twitter", "facebook"];
+const PLATFORMS = ['instagram', 'youtube', 'tiktok', 'twitter', 'facebook'];
+const PAYPAL_BUTTON_ID = 'NBD7CEP5TEYXN';
 
+// Onboarding wizard modal (shown if user has no creator profile)
+function OnboardingModal({ currentUser, onComplete }) {
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  // Step 0: Dashboard tour
+  // Step 1: YouTube
+  // Step 2: Instagram
+  // Step 3: Corner Nickname
+  // Step 4: Payment
+  // Step 5: Complete
+
+  const [youtubeHandle, setYoutubeHandle] = useState('');
+  const [youtubeValid, setYoutubeValid] = useState(null);
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [instagramValid, setInstagramValid] = useState(null);
+  const [cornerNickname, setCornerNickname] = useState('');
+  const [nicknameValid, setNicknameValid] = useState(null);
+  const [paymentComplete, setPaymentComplete] = useState(false);
+
+  const handleYoutubeValidate = async () => {
+    setLoading(true);
+    const result = await validateYouTubeHandle(youtubeHandle);
+    setYoutubeValid(result.valid ? { success: true } : { success: false, error: result.error });
+    setLoading(false);
+  };
+
+  const handleInstagramValidate = async () => {
+    if (!instagramUrl.trim()) {
+      setInstagramValid(null);
+      return;
+    }
+    setLoading(true);
+    const result = await validateInstagramHandle(instagramUrl);
+    setInstagramValid(result.valid ? { success: true } : { success: false, error: result.error });
+    setLoading(false);
+  };
+
+  const handleNicknameValidate = () => {
+    const result = validateCreatorsCornerNickname(cornerNickname);
+    setNicknameValid(result.valid ? { success: true } : { success: false, error: result.error });
+  };
+
+  const isStepComplete = () => {
+    switch (step) {
+      case 0:
+        return true; // tour is always complete
+      case 1:
+        return youtubeValid?.success;
+      case 2:
+        if (!instagramUrl.trim()) return true;
+        return instagramValid?.success;
+      case 3:
+        return instagramUrl.trim() ? nicknameValid?.success : true;
+      case 4:
+        return paymentComplete;
+      default:
+        return false;
+    }
+  };
+
+  const handleNext = () => {
+    if (step === 3 && instagramUrl.trim() && !nicknameValid?.success) {
+      handleNicknameValidate();
+      return;
+    }
+    if (isStepComplete()) {
+      setStep(step + 1);
+    }
+  };
+
+  const handleComplete = async () => {
+    setLoading(true);
+    try {
+      await setDoc(
+        doc(db, 'creators', currentUser.uid),
+        {
+          youtubeHandle,
+          instagramUrl: instagramUrl || null,
+          cornerNickname: instagramUrl ? cornerNickname : null,
+          onboardingCompleted: true,
+          onboardingDate: serverTimestamp(),
+          status: 'active',
+        },
+        { merge: true }
+      );
+      onComplete();
+    } catch (err) {
+      console.error('Error saving creator profile:', err);
+      setError('Failed to save profile. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="onboarding-overlay">
+      <div className="onboarding-modal">
+        <button
+          className="onboarding-close"
+          onClick={() => {
+            /* can't close until complete */
+          }}
+          disabled
+        >
+          ×
+        </button>
+
+        {/* Step 0: Welcome tour */}
+        {step === 0 && (
+          <div className="onboarding-content">
+            <h2>Welcome to Your Illy Social Creator Dashboard</h2>
+            <div className="tour-cards">
+              <div className="tour-card">
+                <div className="tour-icon">📊</div>
+                <h3>Campaign Manager</h3>
+                <p>View and manage all your social media growth campaigns in one place</p>
+              </div>
+              <div className="tour-card">
+                <div className="tour-icon">🎬</div>
+                <h3>Creators Corner</h3>
+                <p>AI-powered fanpage built from your YouTube & Instagram — auto-generated and deployed</p>
+              </div>
+              <div className="tour-card">
+                <div className="tour-icon">💰</div>
+                <h3>Integrations</h3>
+                <p>Connect CashApp, PayPal, and other payment links for fan support</p>
+              </div>
+              <div className="tour-card">
+                <div className="tour-icon">💬</div>
+                <h3>Fan Messages</h3>
+                <p>Let your community leave messages on your Creators Corner fanpage</p>
+              </div>
+            </div>
+            <p className="tour-subtitle">Let's get you set up in 4 quick steps →</p>
+          </div>
+        )}
+
+        {/* Step 1: YouTube */}
+        {step === 1 && (
+          <div className="onboarding-content">
+            <h2>Step 1: Connect Your YouTube</h2>
+            <p>Where does your content live?</p>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="@YourChannelName"
+                value={youtubeHandle}
+                onChange={(e) => {
+                  setYoutubeHandle(e.target.value);
+                  setYoutubeValid(null);
+                }}
+              />
+              <button onClick={handleYoutubeValidate} disabled={loading || !youtubeHandle}>
+                {loading ? 'Checking...' : 'Verify'}
+              </button>
+              {youtubeValid && (
+                <span className={`status ${youtubeValid.success ? 'success' : 'error'}`}>
+                  {youtubeValid.success ? '✓' : '✗'}
+                </span>
+              )}
+            </div>
+            {youtubeValid?.error && <p className="error-text">{youtubeValid.error}</p>}
+          </div>
+        )}
+
+        {/* Step 2: Instagram */}
+        {step === 2 && (
+          <div className="onboarding-content">
+            <h2>Step 2: Instagram (Optional)</h2>
+            <p>Add your public Instagram profile</p>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="instagram.com/yourprofile"
+                value={instagramUrl}
+                onChange={(e) => {
+                  setInstagramUrl(e.target.value);
+                  setInstagramValid(null);
+                }}
+              />
+              {instagramUrl && (
+                <button onClick={handleInstagramValidate} disabled={loading}>
+                  {loading ? 'Checking...' : 'Verify'}
+                </button>
+              )}
+              {instagramValid && (
+                <span className={`status ${instagramValid.success ? 'success' : 'error'}`}>
+                  {instagramValid.success ? '✓' : '✗'}
+                </span>
+              )}
+            </div>
+            {instagramValid?.error && <p className="error-text">{instagramValid.error}</p>}
+            <p className="hint">Leave blank to skip</p>
+          </div>
+        )}
+
+        {/* Step 3: Corner Nickname */}
+        {step === 3 && instagramUrl && (
+          <div className="onboarding-content">
+            <h2>Step 3: Your Creators Corner</h2>
+            <p>Your fanpage URL: illy-ris.com/movie/[your-name]/</p>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="e.g., YASHHH"
+                value={cornerNickname}
+                onChange={(e) => {
+                  setCornerNickname(e.target.value);
+                  setNicknameValid(null);
+                }}
+              />
+              <button onClick={handleNicknameValidate} disabled={!cornerNickname}>
+                Check
+              </button>
+              {nicknameValid && (
+                <span className={`status ${nicknameValid.success ? 'success' : 'error'}`}>
+                  {nicknameValid.success ? '✓' : '✗'}
+                </span>
+              )}
+            </div>
+            {nicknameValid?.error && <p className="error-text">{nicknameValid.error}</p>}
+          </div>
+        )}
+
+        {/* Step 4: Payment */}
+        {step === 4 && (
+          <div className="onboarding-content">
+            <h2>Step 4: Activate Your Creator Profile</h2>
+            <p>One-time $5 fee to unlock your Creators Corner & integrations</p>
+            <div className="paypal-container">
+              <div id="paypal-container-NBD7CEP5TEYXN"></div>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    if (window.paypal) {
+                      paypal.HostedButtons({
+                        hostedButtonId: "${PAYPAL_BUTTON_ID}",
+                      }).render("#paypal-container-NBD7CEP5TEYXN");
+                    }
+                  `,
+                }}
+              />
+            </div>
+            <button className="payment-complete-btn" onClick={() => setPaymentComplete(true)}>
+              Payment Complete? Click Here
+            </button>
+          </div>
+        )}
+
+        {/* Navigation */}
+        <div className="onboarding-nav">
+          {step > 0 && (
+            <button onClick={() => setStep(step - 1)} className="btn-prev">
+              ← Back
+            </button>
+          )}
+          {step < 4 && (
+            <button onClick={handleNext} disabled={!isStepComplete() || loading} className="btn-next">
+              Next →
+            </button>
+          )}
+          {step === 4 && (
+            <button onClick={handleComplete} disabled={!paymentComplete || loading} className="btn-complete">
+              {loading ? 'Setting up...' : 'Complete Setup'}
+            </button>
+          )}
+        </div>
+
+        {error && <p className="onboarding-error">{error}</p>}
+
+        {/* Progress */}
+        <div className="progress-dots">
+          {[0, 1, 2, 3, 4].map((num) => (
+            <div key={num} className={`dot ${num <= step ? 'active' : ''}`} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main dashboard
 const CreatorsDashboard = () => {
   const navigate = useNavigate();
   const { currentUser, userProfile, updateSettings, signout } = useAuth();
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [creatorProfile, setCreatorProfile] = useState(null);
+  const [checkingProfile, setCheckingProfile] = useState(true);
 
-  // Hydrate the settings form once the Firestore profile is available.
+  // Check if creator has an onboarded profile
+  useEffect(() => {
+    if (userProfile) {
+      setCreatorProfile(userProfile);
+      setCheckingProfile(false);
+    }
+  }, [userProfile]);
+
+  // Hydrate the settings form
   useEffect(() => {
     if (userProfile?.settings) {
       setForm(userProfile.settings);
@@ -21,7 +323,7 @@ const CreatorsDashboard = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setSaved(false);
-    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const handleSave = async (e) => {
@@ -31,23 +333,31 @@ const CreatorsDashboard = () => {
       await updateSettings(form);
       setSaved(true);
     } catch (err) {
-      console.error("Failed to save settings:", err);
+      console.error('Failed to save settings:', err);
     }
     setSaving(false);
   };
 
   const handleSignOut = async () => {
     await signout();
-    navigate("/signin", { replace: true });
+    navigate('/signin', { replace: true });
+  };
+
+  const handleOnboardingComplete = () => {
+    setCreatorProfile({ onboardingCompleted: true });
   };
 
   if (!currentUser) return null;
+  if (checkingProfile) return null;
 
-  const name = currentUser.displayName || "Creator";
-  const initial = (name[0] || "C").toUpperCase();
+  const name = currentUser.displayName || 'Creator';
+  const initial = (name[0] || 'C').toUpperCase();
+  const hasProfile = creatorProfile?.onboardingCompleted;
 
   return (
     <div className="dashboard-page">
+      {!hasProfile && <OnboardingModal currentUser={currentUser} onComplete={handleOnboardingComplete} />}
+
       <div className="dashboard-container">
         <header className="dashboard-header">
           <div className="dashboard-brand">
@@ -74,12 +384,10 @@ const CreatorsDashboard = () => {
         </section>
 
         <section className="dashboard-card">
-          <h2 className="dashboard-card-title">Your IllySocial Settings</h2>
-          <p className="dashboard-card-sub">
-            These settings are tied to your Google account and follow you everywhere.
-          </p>
+          <h2 className="dashboard-card-title">Your Illy Social Creator Profile</h2>
+          <p className="dashboard-card-sub">Manage your Creators Corner, integrations, and campaign settings</p>
 
-          {form && (
+          {hasProfile && form && (
             <form className="dashboard-form" onSubmit={handleSave}>
               <div className="form-group">
                 <label>Display Handle</label>
@@ -135,7 +443,7 @@ const CreatorsDashboard = () => {
               </label>
 
               <button type="submit" className="submit-btn" disabled={saving}>
-                {saving ? "Saving..." : "Save Settings"}
+                {saving ? 'Saving...' : 'Save Settings'}
               </button>
               {saved && <p className="dashboard-saved">✓ Settings saved</p>}
             </form>
