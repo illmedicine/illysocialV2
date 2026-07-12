@@ -146,7 +146,7 @@ function OnboardingModal({ currentUser, onComplete }) {
   useEffect(() => {
     if (step === 4 && !paypalLoaded) {
       const script = document.createElement('script');
-      script.src = 'https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt5Qs30l2ijabxV5OlqaH0hqrHIqrzQDvW08zxsuR979-8DNyVzXwpa';
+      script.src = 'https://www.paypal.com/sdk/js?client-id=BAACVz29C_Abgp2SNMII6zRix5largq7DDTUc1DNnG49p8LQOw2ClZGqRlnURBmpOWkkph_8zKeWIut-jw&components=hosted-buttons&enable-funding=venmo&currency=USD';
       script.async = true;
       script.onload = () => {
         setPaypalLoaded(true);
