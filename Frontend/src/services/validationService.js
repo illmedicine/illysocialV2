@@ -1,21 +1,40 @@
-// YouTube & Instagram validation (Phase 1: basic HTTP checks)
+// YouTube & Instagram validation with scraping (Phase 2.1)
 
 export const validateYouTubeHandle = async (handle) => {
   if (!handle || handle.trim().length === 0) {
     return { valid: false, error: 'YouTube handle is required' };
   }
 
+  const cleanHandle = handle.trim().replace(/^@/, '');
+
   try {
-    // Simple check: try to fetch the channel page
-    // In production, use YouTube Data API v3
-    const response = await fetch(`https://www.youtube.com/@${encodeURIComponent(handle)}`, {
-      method: 'HEAD',
-      mode: 'no-cors',
+    // Fetch the channel page and check if it contains channel metadata
+    const url = `https://www.youtube.com/@${encodeURIComponent(cleanHandle)}`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
     });
-    // If we get here without error, handle likely exists
-    return { valid: true, handle };
+
+    if (response.status === 404) {
+      return { valid: false, error: 'YouTube channel not found' };
+    }
+
+    // Check if we got a valid HTML response
+    if (response.ok) {
+      const html = await response.text();
+      // YouTube loads channel name in the title tag or initial data
+      if (html.includes('yt-formatted-string') || html.includes('ytInitialData')) {
+        return { valid: true, handle: cleanHandle };
+      }
+      // Also accept if we just got a successful response (no 404)
+      return { valid: true, handle: cleanHandle };
+    }
+
+    return { valid: false, error: 'Could not verify YouTube channel. Please check the handle and try again.' };
   } catch (err) {
-    return { valid: false, error: 'Could not verify YouTube handle. Please check and try again.' };
+    console.error('YouTube validation error:', err);
+    return { valid: false, error: 'Network error. Please check the handle and try again.' };
   }
 };
 
@@ -25,20 +44,46 @@ export const validateInstagramHandle = async (url) => {
   }
 
   try {
-    // Extract handle from URL (e.g., instagram.com/username or @username)
+    // Extract handle from various input formats
     let handle = url.trim();
     if (handle.startsWith('@')) handle = handle.slice(1);
     if (handle.includes('instagram.com/')) {
-      handle = handle.split('instagram.com/')[1].replace(/\/$/, '').replace(/[?#].*/, '');
+      handle = handle.split('instagram.com/')[1].replace(/\/$/, '').replace(/[?#].*/, '').split('/')[0];
     }
 
-    // Simple check: Instagram allows public profile access
-    const response = await fetch(`https://www.instagram.com/${handle}/?__a=1`, {
-      mode: 'no-cors',
+    // Validate handle format
+    if (!/^[a-zA-Z0-9._]{1,30}$/.test(handle)) {
+      return { valid: false, error: 'Invalid Instagram handle format' };
+    }
+
+    // Fetch the Instagram profile page
+    const profileUrl = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+    const response = await fetch(profileUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
     });
-    return { valid: true, handle, url };
-  } catch (err) {
+
+    // Instagram returns 404 for non-existent profiles
+    if (response.status === 404) {
+      return { valid: false, error: 'Instagram profile not found' };
+    }
+
+    // Check if we got a valid response
+    if (response.ok) {
+      const html = await response.text();
+      // Check for profile indicators in the response
+      if (html.includes('profile') || html.includes('instagram')) {
+        return { valid: true, handle, url: profileUrl };
+      }
+      // Accept successful response even if we can't verify content
+      return { valid: true, handle, url: profileUrl };
+    }
+
     return { valid: false, error: 'Could not verify Instagram profile. Please check the URL.' };
+  } catch (err) {
+    console.error('Instagram validation error:', err);
+    return { valid: false, error: 'Network error. Please check the URL and try again.' };
   }
 };
 
