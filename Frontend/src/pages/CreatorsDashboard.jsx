@@ -210,22 +210,25 @@ function OnboardingModal({ currentUser, onComplete }) {
         {/* Step 0: Welcome tour */}
         {step === 0 && (
           <div className="onboarding-content">
-            <h2>Welcome to Your Illy Social Creator Dashboard</h2>
+            <h2>$5 to Onboard</h2>
+            <p style={{ fontSize: '16px', marginBottom: '24px', color: '#22d3ee' }}>
+              Includes Free Creators Corner + Illy Robotic Creator Scaling Toolkit
+            </p>
             <div className="tour-cards">
-              <div className="tour-card">
-                <div className="tour-icon">📊</div>
-                <h3>Campaign Manager</h3>
-                <p>View and manage all your social media growth campaigns in one place</p>
-              </div>
               <div className="tour-card">
                 <div className="tour-icon">🎬</div>
                 <h3>Creators Corner</h3>
                 <p>AI-powered fanpage built from your YouTube & Instagram — auto-generated and deployed</p>
               </div>
               <div className="tour-card">
+                <div className="tour-icon">🛠️</div>
+                <h3>Creator Scaling Toolkit</h3>
+                <p>Access to Illy Robotic's creator tools and resources to grow your audience</p>
+              </div>
+              <div className="tour-card">
                 <div className="tour-icon">💰</div>
-                <h3>Integrations</h3>
-                <p>Connect CashApp, PayPal, and other payment links for fan support</p>
+                <h3>Fan Payment Links</h3>
+                <p>Connect CashApp, PayPal, Venmo, and other payment methods for fan support</p>
               </div>
               <div className="tour-card">
                 <div className="tour-icon">💬</div>
@@ -327,8 +330,8 @@ function OnboardingModal({ currentUser, onComplete }) {
         {/* Step 4: Payment */}
         {step === 4 && (
           <div className="onboarding-content">
-            <h2>Step 4: Activate Your Creator Profile</h2>
-            <p>One-time $5 fee to unlock your Creators Corner & integrations</p>
+            <h2>Step 4: Complete Your Onboarding</h2>
+            <p>$5 one-time fee includes Creators Corner + Illy Robotic Creator Scaling Toolkit access</p>
             {shouldSkipPayment ? (
               <div style={{
                 padding: '20px',
