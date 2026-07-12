@@ -10,6 +10,7 @@ import {
 } from '../services/validationService';
 import { generateFanpageHTML } from '../services/fanpageGenerator';
 import { saveFanpage } from '../services/fanpageService';
+import PaymentLinksManager from '../components/PaymentLinksManager';
 import './CreatorsDashboard.css';
 
 const PLATFORMS = ['instagram', 'youtube', 'tiktok', 'twitter', 'facebook'];
@@ -113,6 +114,7 @@ function OnboardingModal({ currentUser, onComplete }) {
             instagramUrl,
             cornerNickname,
             displayName: currentUser.displayName || cornerNickname,
+            paymentLinks: [], // Will be added via dashboard settings later
           };
 
           setError('Generating your custom fanpage...');
@@ -503,6 +505,18 @@ const CreatorsDashboard = () => {
             </form>
           )}
         </section>
+
+        {hasProfile && (
+          <section className="dashboard-card">
+            <PaymentLinksManager
+              userId={currentUser.uid}
+              paymentLinks={userProfile?.paymentLinks || []}
+              onUpdate={() => {
+                // Refresh profile data
+              }}
+            />
+          </section>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,15 @@ const client = new Anthropic({
 });
 
 export const generateFanpageHTML = async (creatorData) => {
-  const { youtubeHandle, instagramUrl, cornerNickname, displayName } = creatorData;
+  const { youtubeHandle, instagramUrl, cornerNickname, displayName, paymentLinks = [] } = creatorData;
+
+  let paymentLinksInfo = '';
+  if (paymentLinks && paymentLinks.length > 0) {
+    paymentLinksInfo = `
+
+Payment Links Available:
+${paymentLinks.map((link) => `- ${link.label}: ${link.identifier}`).join('\n')}`;
+  }
 
   const prompt = `You are a creative web designer. Generate a custom, visually unique HTML fanpage for a content creator. The fanpage should:
 
@@ -14,7 +22,7 @@ Creator Info:
 - Name: ${displayName || cornerNickname}
 - YouTube: @${youtubeHandle}
 - Instagram: ${instagramUrl || "Not provided"}
-- Fanpage URL: illy-ris.com/movie/${cornerNickname}/
+- Fanpage URL: illy-ris.com/movie/${cornerNickname}/${paymentLinksInfo}
 
 Requirements:
 1. Create a single, self-contained HTML file (no external dependencies)
@@ -24,8 +32,8 @@ Requirements:
    - Hero section with creator name and tagline
    - Sections for YouTube and Instagram (if provided)
    - Call-to-action buttons linking to their social media
+   - Payment/donation section (if payment links provided, show them; otherwise show generic payment placeholders)
    - Message/comment section placeholder
-   - Donation/support section with generic payment link placeholders
 5. Use a color scheme that feels premium and creative
 6. Include smooth animations and transitions
 7. Make it fully responsive for mobile and desktop
