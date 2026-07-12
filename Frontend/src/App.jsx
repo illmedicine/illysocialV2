@@ -4,6 +4,7 @@ import RndLab from './pages/RndLab';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import CreatorsDashboard from './pages/CreatorsDashboard';
+import CreatorsCorner from './pages/CreatorsCorner';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/movie/:nickname" element={<CreatorsCorner />} />
         {/* Unknown routes fall back to home. */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

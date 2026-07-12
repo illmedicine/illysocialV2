@@ -8,6 +8,8 @@ import {
   validateInstagramHandle,
   validateCreatorsCornerNickname,
 } from '../services/validationService';
+import { generateFanpageHTML } from '../services/fanpageGenerator';
+import { saveFanpage } from '../services/fanpageService';
 import './CreatorsDashboard.css';
 
 const PLATFORMS = ['instagram', 'youtube', 'tiktok', 'twitter', 'facebook'];
@@ -89,6 +91,7 @@ function OnboardingModal({ currentUser, onComplete }) {
   const handleComplete = async () => {
     setLoading(true);
     try {
+      // 1. Save creator profile to Firestore
       await setDoc(
         doc(db, 'creators', currentUser.uid),
         {
@@ -101,6 +104,34 @@ function OnboardingModal({ currentUser, onComplete }) {
         },
         { merge: true }
       );
+
+      // 2. Generate AI fanpage if Instagram is provided (fanpage requires Instagram content)
+      if (instagramUrl && cornerNickname) {
+        try {
+          const creatorData = {
+            youtubeHandle,
+            instagramUrl,
+            cornerNickname,
+            displayName: currentUser.displayName || cornerNickname,
+          };
+
+          setError('Generating your custom fanpage...');
+          const fanpageResult = await generateFanpageHTML(creatorData);
+
+          if (fanpageResult.success) {
+            // 3. Save generated fanpage to Firestore
+            await saveFanpage(currentUser.uid, cornerNickname, fanpageResult.html);
+            setError('');
+          } else {
+            console.warn('Fanpage generation warning:', fanpageResult.error);
+            // Don't fail the onboarding if fanpage generation fails
+          }
+        } catch (fanpageErr) {
+          console.error('Fanpage generation error:', fanpageErr);
+          // Continue anyway - fanpage generation is secondary
+        }
+      }
+
       onComplete();
     } catch (err) {
       console.error('Error saving creator profile:', err);
