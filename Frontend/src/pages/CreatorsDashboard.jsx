@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import {
   validateYouTubeHandle,
@@ -11,6 +11,7 @@ import {
 import { generateFanpageHTML } from '../services/fanpageGenerator';
 import { saveFanpage } from '../services/fanpageService';
 import PaymentLinksManager from '../components/PaymentLinksManager';
+import CampaignManager from '../components/CampaignManager';
 import './CreatorsDashboard.css';
 
 const PLATFORMS = ['instagram', 'youtube', 'tiktok', 'twitter', 'facebook'];
@@ -455,13 +456,25 @@ const CreatorsDashboard = () => {
   const [creatorProfile, setCreatorProfile] = useState(null);
   const [checkingProfile, setCheckingProfile] = useState(true);
 
-  // Check if creator has an onboarded profile
+  // Check if creator has an onboarded profile. Onboarding writes to the
+  // 'creators' collection (not 'users'), so we subscribe to that doc
+  // directly rather than relying on the AuthContext's userProfile.
   useEffect(() => {
-    if (userProfile) {
-      setCreatorProfile(userProfile);
-      setCheckingProfile(false);
-    }
-  }, [userProfile]);
+    if (!currentUser) return;
+    const ref = doc(db, 'creators', currentUser.uid);
+    const unsub = onSnapshot(
+      ref,
+      (snap) => {
+        setCreatorProfile(snap.exists() ? snap.data() : null);
+        setCheckingProfile(false);
+      },
+      (err) => {
+        console.error('Failed to load creator profile:', err);
+        setCheckingProfile(false);
+      }
+    );
+    return unsub;
+  }, [currentUser]);
 
   // Hydrate the settings form
   useEffect(() => {
@@ -493,9 +506,9 @@ const CreatorsDashboard = () => {
     navigate('/signin', { replace: true });
   };
 
-  const handleOnboardingComplete = () => {
-    setCreatorProfile({ onboardingCompleted: true });
-  };
+  // The live 'creators' doc subscription above will pick up the onboarding
+  // write automatically; this just exists to satisfy OnboardingModal's prop.
+  const handleOnboardingComplete = () => {};
 
   if (!currentUser) return null;
   if (checkingProfile) return null;
@@ -533,9 +546,11 @@ const CreatorsDashboard = () => {
           </div>
         </section>
 
+        {hasProfile && <CampaignManager userId={currentUser.uid} />}
+
         <section className="dashboard-card">
-          <h2 className="dashboard-card-title">Your Illy Social Creator Profile</h2>
-          <p className="dashboard-card-sub">Manage your Creators Corner, integrations, and campaign settings</p>
+          <h2 className="dashboard-card-title">Account Settings</h2>
+          <p className="dashboard-card-sub">Manage your Creators Corner profile and integrations</p>
 
           {hasProfile && form && (
             <form className="dashboard-form" onSubmit={handleSave}>

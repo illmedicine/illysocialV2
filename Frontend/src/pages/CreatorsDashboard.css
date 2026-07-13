@@ -460,9 +460,14 @@
 
 .dashboard-card {
   padding: 32px;
+  margin-bottom: 24px;
   background: rgba(9, 12, 26, 0.4);
   border: 1px solid rgba(139, 123, 255, 0.15);
   border-radius: 16px;
+}
+
+.dashboard-card:last-child {
+  margin-bottom: 0;
 }
 
 .dashboard-card-title {
