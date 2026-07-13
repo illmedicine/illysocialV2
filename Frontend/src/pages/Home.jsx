@@ -113,7 +113,11 @@ const Home = () => {
 
   const handleOrder = (orderData) => {
     console.log('Order placed:', orderData);
-    alert(`Order placed successfully!\n\nService: ${orderData.service}\nQuantity: ${orderData.quantity}\nURL: ${orderData.url}\nPrice: $${orderData.price}\nPayment Method: ${orderData.paymentMethod}\n\nThank you for your order!`);
+    if (orderData.success) {
+      alert(`Payment confirmed!\n\nService: ${orderData.service}\nQuantity: ${orderData.quantity}\nURL: ${orderData.url}\nPrice: $${orderData.price}\nPayment Method: ${orderData.paymentMethod}\nOrder ID: ${orderData.orderId}\n\nThank you for your order!`);
+    } else {
+      alert(`Payment could not be completed. Please try again.`);
+    }
   };
 
   // If a category is selected, show services for that category
@@ -164,11 +168,12 @@ const Home = () => {
           </section>
         </div>
 
-        <ServiceModal 
+        <ServiceModal
           service={selectedService}
           onClose={() => setSelectedService(null)}
+          onOrder={handleOrder}
         />
-        
+
         <Footer />
       </div>
     );
